@@ -16,6 +16,8 @@ class AvailableManager(models.Manager):
         return super().get_queryset().filter(is_available=True)
 
 
+
+
 class Category(TimeStampedModel):
     name = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(unique=True, always_update=False, populate_from="name")
