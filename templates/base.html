@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<meta charset="UTF-8">
+	<meta name="description" content=" Luyza Ana Store | Maquiagens e Acessórios">
+	<meta name="keywords" content="Luyza Ana, Maquiagem, Acessórios, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Favicon -->
+	<link href="img/favicon.ico" rel="shortcut icon"/>
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+
+</head>
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Header section -->
+	<header class="header-section">
+		<div class="header-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-2 text-center text-lg-left">
+						<!-- logo -->
+						<a href="{% url 'pages:home' %}" class="site-logo">
+							<img src="{% static 'img/logo.png' %}" alt="" width="50%" height="">
+						</a>
+					</div>
+					<div class="col-xl-6 col-lg-5">
+						<form class="header-search-form">
+							<input type="text" placeholder="Pesquisar na Luyza Ana ....">
+							<button><i class="flaticon-search"></i></button>
+						</form>
+					</div>
+					<div class="col-xl-4 col-lg-5 direita">
+						<div class="user-panel">
+                            {% if user.is_authenticated %}
+                            <div class="up-item">
+								<i class="flaticon-profile"></i>
+								<a href="{% url 'account_logout' %}">Sair</a>
+							</div>
+                            <div class="up-item">
+								<div class="shopping-card">
+									<i class="flaticon-bag"></i>
+									<span>0</span>
+								</div>
+								<a href="#">Meu Carrinho</a>
+							</div>
+                            {% else %}
+                            <div class="up-item">
+								<i class="flaticon-profile"></i>
+								<a href="{% url 'account_login' %}">Entrar</a> ou <a href="{% url 'account_signup' %}">Criar Conta</a>
+							</div>
+                            {% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<nav class="main-navbar">
+			<div class="container">
+				<!-- menu -->
+				<ul class="main-menu">
+					<li><a href="{% url 'pages:home' %}">Início</a></li>
+					<li><a href="#">Produtos</a></li>
+					<li><a href="#">Trocas</a></li>
+					<li><a href="#">Contato
+					</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<!-- Header section end -->
+
+    {% block content %}{% endblock %}
+
+	<!-- Footer section -->
+	<section class="footer-section">
+		<div class="container">
+			<div class="footer-logo text-center">
+				<a href="{% url 'pages:home' %}"><img src="{% static 'img/logo-light.png' %}" alt=""></a>
+			</div>
+			<div class="row">
+				<div class="col-lg-3 col-sm-6">
+					<div class="footer-widget about-widget">
+						<h2>Sobre Nós</h2>
+						<p>Donec vitae purus nunc. Morbi faucibus erat sit amet congue mattis. Nullam frin-gilla faucibus urna, id dapibus erat iaculis ut. Integer ac sem.</p>
+						<img src="{% static 'img/cards.png' %}" alt="">
+					</div>
+				</div>
+				<div class="col-lg-3 col-sm-6">
+					<div class="footer-widget contact-widget">
+						<h2>Contato</h2>
+						<div class="con-info">
+							<span>C.</span>
+							<p>Luyza Ana Store </p>
+						</div>
+						<div class="con-info">
+							<span>T.</span>
+							<p>+55 019 9878 09477</p>
+						</div>
+						<div class="con-info">
+							<span>E.</span>
+							<p>luyzastore@gmail.com</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-sm-6">
+					<div class="footer-widget contact-widget social-links">
+						<h2>Mídias</h2>
+						<ul>
+							<li><a href="https://instagram.com/luyzaanastore?utm_medium=copy_link" class="instagram">
+																							<i class="fa fa-instagram"></i><span>instagram</span></a></li>
+								<li><a href="" class="facebook"><i class="fa fa-facebook"></i><span>facebook</span></a></li>
+								<li><a href="" class="twitter"><i class="fa fa-twitter"></i><span>twitter</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Footer section end -->
+
+
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src="/static/js/jquery-3.2.1.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/jquery.slicknav.min.js"></script>
+	<script src="/static/js/owl.carousel.min.js"></script>
+	<script src="/static/js/jquery.nicescroll.min.js"></script>
+	<script src="/static/js/jquery.zoom.min.js"></script>
+	<script src="/static/js/jquery-ui.min.js"></script>
+	<script src="/static/js/main.js"></script>
+
+	</body>
+</html>

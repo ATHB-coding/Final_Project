@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}Luyza Ana Store | Maquiagens e Acessórios{% endblock %}
+
+{% block content %}
+{% load static %}
+    <!-- letest product section -->
+	<section class="top-letest-product-section">
+		<div class="container">
+			<div class="section-title">
+				<h2>ÚLTIMOS LANÇAMENTOS</h2>
+			</div>
+			<div class="product-slider owl-carousel">
+				<div class="product-item">
+					<div class="pi-pic">
+						<img src="{% static 'img/product/1.jpg' %}" alt="">
+						<div class="pi-links">
+							<a href="#" class="add-card"><i class="flaticon-bag"></i><span>CARRINHO</span></a>
+							<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+						</div>
+					</div>
+					<div class="pi-text">
+						<h6>R$9,99</h6>
+						<p>Gel Primer Fixador de Maquiagem </p>
+					</div>
+				</div>
+				<div class="product-item">
+					<div class="pi-pic">
+						<div class="tag-new">New</div>
+						<img src="{% static 'img/product/2.jpg' %}" alt="">
+						<div class="pi-links">
+							<a href="#" class="add-card"><i class="flaticon-bag"></i><span>CARRINHO</span></a>
+							<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+						</div>
+					</div>
+					<div class="pi-text">
+						<h6>R$4,99</h6>
+						<p>Máscara Facial Peel Off</p>
+					</div>
+				</div>
+				<div class="product-item">
+					<div class="pi-pic">
+						<img src="{% static 'img/product/3.jpg' %}" alt="">
+						<div class="pi-links">
+							<a href="#" class="add-card"><i class="flaticon-bag"></i><span>CARRINHO</span></a>
+							<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+						</div>
+					</div>
+					<div class="pi-text">
+						<h6>R$13,99</h6>
+						<p>Duo de Blushes Natural da Jasmyne </p>
+					</div>
+				</div>
+				<div class="product-item">
+						<div class="pi-pic">
+							<img src="{% static 'img/product/4.jpg' %}" alt="">
+							<div class="pi-links">
+								<a href="#" class="add-card"><i class="flaticon-bag"></i><span>CARRINHO</span></a>
+								<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+							</div>
+						</div>
+						<div class="pi-text">
+							<h6>$9,99</h6>
+							<p>Batom Líquido Brilho Nude </p>
+						</div>
+					</div>
+				<div class="product-item">
+						<div class="pi-pic">
+							<img src="{% static 'img/product/6.jpg' %}" alt="">
+							<div class="pi-links">
+								<a href="#" class="add-card"><i class="flaticon-bag"></i><span>CARRINHO</span></a>
+								<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+							</div>
+						</div>
+						<div class="pi-text">
+							<h6>R$9,99</h6>
+							<p>Cola para Cílios Postiços </p>
+						</div>
+					</div>
+			</div>
+		</div>
+	</section>
+	<!-- letest product section end -->
+{% endblock %}
