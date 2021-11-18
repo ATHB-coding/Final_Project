@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load product_tags %}
+
+{% block title %}
+{% if category %}
+{{ category.name }}
+{% else %}
+Produtos
+{% endif %}
+{% endblock title %}
+
+{% block content %}
+
+    <!-- Page info -->
+	<div class="page-top-info">
+		<div class="container">
+			<h4>Nossos Produtos</h4>
+			<div class="site-pagination">
+				<a href="">Início</a> /
+				<a href="">Produtos</a> /
+			</div>
+		</div>
+	</div>
+	<!-- Page info end -->
+
+
+	<!-- Category section -->
+	<section class="category-section spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 order-2 order-lg-1">
+					<div class="filter-widget">
+						<h2 class="fw-title">Categorias</h2>
+						<ul class="category-menu">
+							<li><a class="{% if not category %}active{% endif %}" href="{% url 'products:list' %}">Todos os produtos</a></li>
+                            {% for cat in categories %}
+                            <li><a class="{% if category == cat %}active{% endif %}" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                            {% endfor %}
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-lg-9  order-1 order-lg-2 mb-5 mb-lg-0">
+					<div class="row">
+						<div class="col-lg-4 col-sm-6">
+                            {% for product in product_list %}
+							<div class="product-item">
+                                <a href="{{ product.get_absolute_url }}">
+                                    <div class="pi-pic">
+                                        {% if product.image %}
+                                        <div class="tag-sale">ON SALE</div>
+                                        <img src="/img/{{product.image}}" alt="">
+                                        {% else %}
+                                        <img src="{% static 'img/no_image.jpg' %}" alt="">
+                                        {% endif %}
+                                    </div>
+                                </a>
+								<div class="pi-text">
+                                     <a class="text-decoration-none text-dark" href="{{ product.get_absolute_url }}">
+                                        <h5 class="card-title">{{ product.name }}</h5>
+                                    </a>
+                                    <a class="text-decoration-none text-dark" href="{{ product.get_absolute_url }}">
+                                        <p class="card-text font-weight-bold">R$ {{ product.price }}</p>
+                                    </a>
+								</div>
+							</div>
+                            {% if forloop.counter|divisibleby:"3" and not forloop.last %}
+						</div>
+                        <div class="col-lg-4 col-sm-6">
+                            {% endif %}
+                            {% endfor %}
+
+                            {% if product_list|length|remainder == 2 %}
+                            <div class="card border-0"></div>
+                            {% elif product_list|length|remainder == 1 %}
+                            <div class="card border-0"></div>
+                            <div class="card border-0"></div>
+                            {% endif %}
+
+                        </div>
+
+						{% if is_paginated %}
+                        {% include "pagination.html" with page=page_obj %}
+                        {% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Category section end -->
+
+{% endblock %}

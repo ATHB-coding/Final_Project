@@ -52,8 +52,17 @@
                             {% if user.is_authenticated %}
                             <div class="up-item">
 								<i class="flaticon-profile"></i>
-								<a href="{% url 'account_logout' %}">Sair</a>
+								<div class="dropdown">
+									<button class="dropbtn">{{ user }}</button>
+									<div class="dropdown-content">
+										<a href="{% url 'account_logout' %}">Sair</a>
+										{% if user.is_staff %}
+										<a href="/admin">Administration</a>
+										{% endif %}
+									</div>
+								</div>
 							</div>
+
                             <div class="up-item">
 								<div class="shopping-card">
 									<i class="flaticon-bag"></i>
