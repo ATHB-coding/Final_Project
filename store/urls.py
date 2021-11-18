@@ -25,7 +25,8 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     # local
     path("products/", include("products.urls")),
-    path("", include("pages.urls", namespace="pages"))
+    path("cart/", include("cart.urls")),
+    path("", include("pages.urls", namespace="pages")),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

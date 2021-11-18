@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # local apps
     "pages.apps.PagesConfig",
     "products.apps.ProductsConfig",
+    "cart.apps.CartConfig",
 ]
 
 MIDDLEWARE = [

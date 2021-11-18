@@ -53,7 +53,7 @@
                             <div class="up-item">
 								<i class="flaticon-profile"></i>
 								<div class="dropdown">
-									<button class="dropbtn">{{ user }}</button>
+									<a >{{ user }}</a>
 									<div class="dropdown-content">
 										<a href="{% url 'account_logout' %}">Sair</a>
 										{% if user.is_staff %}
@@ -68,7 +68,7 @@
 									<i class="flaticon-bag"></i>
 									<span>0</span>
 								</div>
-								<a href="#">Meu Carrinho</a>
+								<a href="{% url 'cart:detail' %}">Meu Carrinho</a>
 							</div>
                             {% else %}
                             <div class="up-item">
