@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "crispy_forms",
+    "widget_tweaks",
     # local apps
     "pages.apps.PagesConfig",
     "products.apps.ProductsConfig",
@@ -133,8 +134,8 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Media
 
-MEDIA_URL = "/img/"
-MEDIA_ROOT = BASE_DIR / "img"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 # Django-allauth
 
@@ -156,3 +157,8 @@ ACCOUNT_UNIQUE_EMAIL = True
 # crispy-forms
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+# Cart
+
+CART_SESSION_ID = "cart"
+CART_ITEM_MAX_QUANTITY = 20

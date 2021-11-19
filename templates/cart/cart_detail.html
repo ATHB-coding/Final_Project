@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load widget_tweaks %}
 
 {% block title %}Meu Carrinho{% endblock title %}
 
@@ -25,57 +26,77 @@
 				<div class="col-lg-8">
 					<div class="cart-table">
 						<h3>Meu Carrinho</h3>
+
 						<div class="cart-table-warp">
+							{% if cart %}
 							<table>
-							<thead>
-								<tr>
-									<th class="product-th">Produto</th>
-									<th class="quy-th">Quantidade</th>
-									<th class="total-th">Preço</th>
-								</tr>
-							</thead>
-							<tbody>
-								{% for order_item in object.items.all %}
-								<tr>
-									<td class="product-col">
-										<img src="img/{{ item.image }}" alt="">
-										<div class="pc-title">
-											<h4>{{ order_item.item.name }}</h4>
-											<p>{{ order_item.item.price }}</p>
-										</div>
-									</td>
-									<td class="quy-col">
-										<div class="quantity">
-											<a href="{% url 'cart:remove-single-item-from-cart' order_item.item.slug %}"><i class="fas fa-minus mr-2"></i></a>
-                							{{ order_item.quantity }}
-                							<a href="{% url 'cart:cart_add' order_item.item.slug %}"><i class="fas fa-plus ml-2"></i></a>
-                    					</div>
-									</td>
-									<td class="total-col">
-										{% if order_item.item.discount_price %}
-											${{ order_item.get_total_discount_item_price }}
-											<span class="badge badge-primary">Saving ${{ order_item.get_amount_saved }}</span>
-										{% else %}
-											${{ order_item.get_total_item_price }}
-										{% endif %}
-										<a style='color: red;' href="{% url 'cart:cart_remove' order_item.item.slug %}">
-											<i class="fas fa-trash float-right"></i>
-										</a>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+								<thead>
+									<tr>
+										<th class="product-th">Produto</th>
+										<th class="quy-th">Quantidade</th>
+										<th class="total-th">Preço</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for item in cart %}
+										{% with product=item.product %}
+										<tr>
+											<td class="product-col">
+												<img src="/img/{{product.image}}" alt="">
+												<div class="pc-title">
+													 <a target="_blank" class="text-decoration-none" href="{{ product.get_absolute_url }}">
+														<h4>{{ product.name }}</h4>
+														 <p>R$ {{ item.price }}</p>
+													</a>
+												</div>
+											</td>
+											<td class="quy-col">
+												<div class="quantity">
+													<form action="{% url 'cart:add' product.id %}" method="post">
+														{% csrf_token %}
+														<div class="form-row">
+															<div class="col">
+																{% render_field item.update_quantity_form.quantity class+="form-control" %}
+															</div>
+															<div class="col">
+																<input class="btn btn-info" type="submit" value="Atualizar">
+															</div>
+														</div>
+														{{ item.update_quantity_form.override }}
+													</form>
+												</div>
+											</td>
+											<td class="total-col">
+												<div class="form-row">
+													<div class="col">
+														R$ {{ item.total_price }}
+													</div>
+													<div class="col">
+														<form action="{% url 'cart:remove' product.id %}" method="post">
+															{% csrf_token %}
+															<input class="btn btn-danger" value="Remover" type="submit"/>
+														</form>
+													</div>
+												</div>
+											</td>
+										</tr>
+										{% endwith %}
+									{% endfor %}
+								</tbody>
+							</table>
+							{% else %}
+							<p>O carrinho está vazio!</p>
+							{% endif %}
 						</div>
-						{% if object.get_total %}
+
 						<div class="total-cost">
-							<h6>Total <span>{{ object.get_total }}</span></h6>
+							<h6>Total <span>R$ {{ cart.get_total_price }}</span></h6>
 						</div>
-						{% endif %}
 					</div>
 				</div>
 				<div class="col-lg-4 card-right">
-					<a href="{% url 'products:list' %}" class="site-btn">Finalizar Compra</a>
-					<a href="" class="site-btn sb-dark">Continue Comprando</a>
+					<a href="" class="site-btn">Finalizar Compra</a>
+					<a href="{% url 'products:list' %}" class="site-btn sb-dark">Continue Comprando</a>
 				</div>
 			</div>
 		</div>

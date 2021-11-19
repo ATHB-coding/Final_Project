@@ -42,44 +42,40 @@ Produtos
 					</div>
 				</div>
 
-				<div class="col-lg-9  order-1 order-lg-2 mb-5 mb-lg-0">
-					<div class="row">
-						<div class="col-lg-4 col-sm-6">
-                            {% for product in product_list %}
-							<div class="product-item">
-                                <a href="{{ product.get_absolute_url }}">
-                                    <div class="pi-pic">
-                                        {% if product.image %}
-                                        <div class="tag-sale">ON SALE</div>
-                                        <img src="/img/{{product.image}}" alt="">
-                                        {% else %}
-                                        <img src="{% static 'img/no_image.jpg' %}" alt="">
-                                        {% endif %}
-                                    </div>
-                                </a>
-								<div class="pi-text">
-                                     <a class="text-decoration-none text-dark" href="{{ product.get_absolute_url }}">
-                                        <h5 class="card-title">{{ product.name }}</h5>
-                                    </a>
-                                    <a class="text-decoration-none text-dark" href="{{ product.get_absolute_url }}">
-                                        <p class="card-text font-weight-bold">R$ {{ product.price }}</p>
-                                    </a>
-								</div>
+				<div class="col-lg-9 order-1">
+					<div class="card-deck mb-3">
+						{% for product in product_list %}
+						<div class="card">
+							<a href="{{ product.get_absolute_url }}">
+								{% if product.image %}
+								<img class="card-img-top" src="/media/{{product.image}}" alt="">
+								{% else %}
+								<img class="card-img-top" src="{% static 'img/no_image.jpg' %}" alt="">
+								{% endif %}
+							</a>
+
+							<div class="card-body d-flex flex-column justify-content-between">
+								<a class="text-decoration-none text-dark" href="{{ product.get_absolute_url }}">
+									<h5 class="card-title">{{ product.name }}</h5>
+								</a>
+								<a class="text-decoration-none text-dark" href="{{ product.get_absolute_url }}">
+									<p class="card-text font-weight-bold">R$ {{ product.price }}</p>
+								</a>
 							</div>
-                            {% if forloop.counter|divisibleby:"3" and not forloop.last %}
 						</div>
-                        <div class="col-lg-4 col-sm-6">
-                            {% endif %}
-                            {% endfor %}
+						{% if forloop.counter|divisibleby:"3" and not forloop.last %}
+					</div>
+					<div class="card-deck mb-3">
+						{% endif %}
+						{% endfor %}
 
-                            {% if product_list|length|remainder == 2 %}
-                            <div class="card border-0"></div>
-                            {% elif product_list|length|remainder == 1 %}
-                            <div class="card border-0"></div>
-                            <div class="card border-0"></div>
-                            {% endif %}
-
-                        </div>
+						{% if product_list|length|remainder == 2 %}
+						<div class="card border-0"></div>
+						{% elif product_list|length|remainder == 1 %}
+						<div class="card border-0"></div>
+						<div class="card border-0"></div>
+						{% endif %}
+					</div>
 
 						{% if is_paginated %}
                         {% include "pagination.html" with page=page_obj %}

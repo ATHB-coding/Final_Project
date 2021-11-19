@@ -4,13 +4,6 @@ from django.urls import reverse
 from model_utils.models import TimeStampedModel
 
 
-LABEL_CHOICES = (
-    ('P', 'primary'),
-    ('S', 'secondary'),
-    ('D', 'danger')
-)
-
-
 class AvailableManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(is_available=True)
@@ -38,11 +31,10 @@ class Product(TimeStampedModel):
     )
     name = models.CharField(max_length=255)
     slug = AutoSlugField(unique=True, always_update=False, populate_from="name")
-    image = models.ImageField(upload_to="img/products", blank=True)
+    image = models.ImageField(upload_to="products/%Y/%m/%d", blank=True)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     is_available = models.BooleanField(default=True)
-    label = models.CharField(choices=LABEL_CHOICES, max_length=1)
 
     objects = models.Manager()
     available = AvailableManager()
