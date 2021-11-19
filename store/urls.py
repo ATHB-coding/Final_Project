@@ -26,6 +26,9 @@ urlpatterns = [
     # local
     path("products/", include("products.urls")),
     path("cart/", include("cart.urls")),
+    path("orders/", include("orders.urls")),
+    path("payments/", include("payments.urls")),
+    path("contact/", include("contact.urls")),
     path("", include("pages.urls", namespace="pages")),
 ]
 if settings.DEBUG:

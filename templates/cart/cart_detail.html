@@ -42,7 +42,7 @@
 										{% with product=item.product %}
 										<tr>
 											<td class="product-col">
-												<img src="/img/{{product.image}}" alt="">
+												<img src="/media/{{product.image}}" alt="">
 												<div class="pc-title">
 													 <a target="_blank" class="text-decoration-none" href="{{ product.get_absolute_url }}">
 														<h4>{{ product.name }}</h4>
@@ -95,7 +95,7 @@
 					</div>
 				</div>
 				<div class="col-lg-4 card-right">
-					<a href="" class="site-btn">Finalizar Compra</a>
+					<a class="site-btn {% if not cart %}disabled{% endif %}" href="{% url 'orders:create' %}">Finalizar Compra</a>
 					<a href="{% url 'products:list' %}" class="site-btn sb-dark">Continue Comprando</a>
 				</div>
 			</div>

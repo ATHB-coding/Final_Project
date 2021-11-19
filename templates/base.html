@@ -87,8 +87,7 @@
 					<li><a href="{% url 'pages:home' %}">Início</a></li>
 					<li><a href="{% url 'products:list' %}">Produtos</a></li>
 					<li><a href="#">Trocas</a></li>
-					<li><a href="#">Contato
-					</a></li>
+					<li><a href="{% url 'contact:contact' %}">Contato</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -155,6 +154,8 @@
 	<script src="/static/js/jquery.zoom.min.js"></script>
 	<script src="/static/js/jquery-ui.min.js"></script>
 	<script src="/static/js/main.js"></script>
+	{% block script %}
+    {% endblock script %}
 
 	</body>
 </html>

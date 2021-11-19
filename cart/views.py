@@ -1,11 +1,13 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 from products.models import Product
+from django.contrib.auth.decorators import login_required
 
 from .cart import Cart
 from .forms import CartAddProductForm
 
 
+@login_required
 @require_POST
 def cart_add(request, product_id):
     cart = Cart(request)
@@ -21,6 +23,7 @@ def cart_add(request, product_id):
     return redirect("cart:detail")
 
 
+@login_required
 @require_POST
 def cart_remove(request, product_id):
     cart = Cart(request)
