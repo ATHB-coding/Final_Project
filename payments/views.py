@@ -9,6 +9,7 @@ from django.views.decorators.http import require_POST
 from django.views.generic import CreateView, TemplateView
 
 from orders.models import Order
+from cart.cart import Cart
 
 from .forms import PaymentForm, UpdatePaymentForm
 from .models import Payment
@@ -30,13 +31,16 @@ class PaymentCreateView(CreateView):
         return form_kwargs
 
     def form_valid(self, form):
+        cart = Cart(self.request)
         form.save()
         redirect_url = "payments:failure"
         status = form.instance.mercado_pago_status
 
         if status == "approved":
+            cart.clear()
             redirect_url = "payments:success"
         if status == "in_process":
+            cart.clear()
             redirect_url = "payments:pending"
 
         if status and status != "rejected":

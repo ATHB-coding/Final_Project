@@ -9,12 +9,7 @@ Contato
 {% block content %}
 <div class="form-container">
 <div class="form-content">
-    <h2>{{ content }}</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button class="btn btn-success" type="submit">Entrar</button>
-    </form>
+    <h2>Mensagem enviada</h2>
 </div>
 </div>
 {% endblock %}

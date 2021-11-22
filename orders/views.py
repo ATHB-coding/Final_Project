@@ -23,7 +23,6 @@ class OrderCreateView(CreateView):
                     price=item["price"],
                     quantity=item["quantity"],
                 )
-            cart.clear()
             self.request.session["order_id"] = order.id
             return redirect(reverse("payments:process"))
         return redirect(reverse("pages:home"))
