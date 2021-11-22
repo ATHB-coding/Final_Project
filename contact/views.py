@@ -13,6 +13,9 @@ def contact_page(request):
 
     if contact_form.is_valid():
         print(contact_form.cleaned_data)
-        return
+        retorno = {
+            "content": "Mensagem enviada",
+        }
+        return render(request, "contact/view.html", retorno)
 
     return render(request, "contact/view.html", context)
